@@ -1,85 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:type="MailApp">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="taskpane.js"></script>
+</head>
+<body>
 
-  <Id>f3e9cce8-0000-4c00-9c00-123456789abc</Id>
-  <Version>1.0.0.0</Version>
-  <ProviderName>Local</ProviderName>
-  <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Reporting Add-in"/>
-  <Description DefaultValue="Minimal reporting fields"/>
+<h3>Reporting</h3>
 
-  <Hosts>
-    <Host Name="Mailbox"/>
-  </Hosts>
+<label>Проект:</label><br>
+<input id="project"><br><br>
 
-  <Requirements>
-    <Sets>
-      <Set Name="Mailbox" MinVersion="1.5"/>
-    </Sets>
-  </Requirements>
+<label>Клиент:</label><br>
+<input id="client"><br><br>
 
-  <Permissions>ReadWriteItem</Permissions>
+<label>Часове:</label><br>
+<input id="hours" type="number"><br><br>
 
-  <Rule xsi:type="RuleCollection" Mode="Or">
-    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
-  </Rule>
+<button onclick="saveData()">Запиши</button>
 
-  <VersionOverrides 
-      xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" 
-      xsi:type="VersionOverridesV1_0">
-
-    <Hosts>
-      <Host xsi:type="MailHost">
-
-        <DesktopFormFactor>
-
-          <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
-            <OfficeTab id="TabDefault">
-              <Group id="grp1">
-                <Label resid="groupLabel"/>
-                <Control xsi:type="Button" id="btn1">
-                  <Label resid="buttonLabel"/>
-                  <Supertip>
-                    <Title resid="buttonLabel"/>
-                    <Description resid="buttonDesc"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="icon16"/>
-                    <bt:Image size="32" resid="icon32"/>
-                    <bt:Image size="80" resid="icon80"/>
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <SourceLocation resid="taskpaneUrl"/>
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
-
-        </DesktopFormFactor>
-      </Host>
-    </Hosts>
-
-    <Resources>
-      <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://ivan-venkov.github.io/outlook-addin/taskpane.html"/>
-      </bt:Urls>
-
-      <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://via.placeholder.com/16"/>
-        <bt:Image id="icon32" DefaultValue="https://via.placeholder.com/32"/>
-        <bt:Image id="icon80" DefaultValue="https://via.placeholder.com/80"/>
-      </bt:Images>
-
-      <bt:Strings>
-        <bt:String id="groupLabel" DefaultValue="Reporting"/>
-        <bt:String id="buttonLabel" DefaultValue="Open Reporting"/>
-        <bt:String id="buttonDesc" DefaultValue="Open reporting panel"/>
-      </bt:Strings>
-    </Resources>
-
-  </VersionOverrides>
-
-</OfficeApp>
+</body>
+</html>
