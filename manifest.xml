@@ -3,7 +3,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:type="MailApp">
 
-  <Id>11111111-2222-3333-4444-555555555555</Id>
+  <Id>f3e9cce8-0000-4c00-9c00-123456789abc</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Local</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -16,18 +16,70 @@
 
   <Requirements>
     <Sets>
-      <Set Name="Mailbox" MinVersion="1.8"/>
+      <Set Name="Mailbox" MinVersion="1.5"/>
     </Sets>
   </Requirements>
 
-  <FormSettings>
-    <Form xsi:type="ItemEdit">
-      <DesktopSettings>
-        <SourceLocation DefaultValue="https://ivan-venkov.github.io/outlook-addin/taskpane.html"/>
-      </DesktopSettings>
-    </Form>
-  </FormSettings>
-
   <Permissions>ReadWriteItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
+  </Rule>
+
+  <VersionOverrides 
+      xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" 
+      xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+
+        <DesktopFormFactor>
+
+          <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="grp1">
+                <Label resid="groupLabel"/>
+                <Control xsi:type="Button" id="btn1">
+                  <Label resid="buttonLabel"/>
+                  <Supertip>
+                    <Title resid="buttonLabel"/>
+                    <Description resid="buttonDesc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="taskpaneUrl"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Urls>
+        <bt:Url id="taskpaneUrl" DefaultValue="https://ivan-venkov.github.io/outlook-addin/taskpane.html"/>
+      </bt:Urls>
+
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://via.placeholder.com/16"/>
+        <bt:Image id="icon32" DefaultValue="https://via.placeholder.com/32"/>
+        <bt:Image id="icon80" DefaultValue="https://via.placeholder.com/80"/>
+      </bt:Images>
+
+      <bt:Strings>
+        <bt:String id="groupLabel" DefaultValue="Reporting"/>
+        <bt:String id="buttonLabel" DefaultValue="Open Reporting"/>
+        <bt:String id="buttonDesc" DefaultValue="Open reporting panel"/>
+      </bt:Strings>
+    </Resources>
+
+  </VersionOverrides>
 
 </OfficeApp>
